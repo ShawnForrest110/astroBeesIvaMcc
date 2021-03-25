@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingsFrag"
+    android:orientation="vertical">
+
+    <ToggleButton
+        android:id="@+id/fc_toggle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="F/C"/>
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Here will show IP"
+        android:textSize="30sp"
+
+        android:textAlignment="center"/>
+
+
+    <EditText
+        android:id="@+id/ip_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="IP # Here"
+
+        />
+
+    <Button
+        android:id="@+id/apply_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_gravity="center_horizontal"
+        android:text="Apply_IP" />
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Apply Button"
+        android:layout_gravity="center_horizontal"
+        android:textSize="30sp"
+        />
+
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save Content"
+        android:layout_gravity="center_horizontal"
+        />
+</LinearLayout>

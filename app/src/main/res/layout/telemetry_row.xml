@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/telemetry_row_view">
+
+    <TextView
+        android:id="@+id/telemetryRowTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Telemetry Title"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/telemetryRowData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Data"
+        android:layout_marginLeft="48sp"
+        android:textSize="24sp" />
+
+</LinearLayout>

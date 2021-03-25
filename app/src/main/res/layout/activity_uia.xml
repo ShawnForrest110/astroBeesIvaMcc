@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_weight="0.5"
+    android:layout_margin="16sp"
+    tools:context=".UiaActivity">
+
+    <TextView
+        android:id="@+id/uia_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textSize="36sp"
+        android:text="UIA" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16sp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:id="@+id/uia_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/emu1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EMU1"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16sp"
+            android:layout_weight="0.5"
+            />
+
+        <TextView
+            android:id="@+id/emu2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EMU2"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16sp"
+            android:layout_weight="0.5"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/uia_linear2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/ev1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EV1 Supply"
+            android:textSize="24sp"
+            android:layout_weight="0.5"
+            />
+
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text=""
+            android:switchMinWidth="56dp"
+            android:textOff="Closed"
+            android:textOn="Open" />
+
+        <TextView
+            android:id="@+id/ev2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EV2 Supply"
+            android:textSize="24sp"
+            android:layout_weight="0.5"/>
+
+        <Switch
+            android:id="@+id/switch2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text=""
+            android:switchMinWidth="56dp"
+            android:textOff="Closed"
+            android:textOn="Open"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/uia_linear3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/ev1w"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EV1 Waste"
+            android:textSize="24sp"
+            android:layout_weight="0.5"
+            />
+
+        <Switch
+            android:id="@+id/switch3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text=""
+            android:switchMinWidth="56dp"
+            android:textOff="Closed"
+            android:textOn="Open" />
+
+        <TextView
+            android:id="@+id/ev2w"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EV2 Waste"
+            android:textSize="24sp"
+            android:layout_weight="0.5"/>
+
+        <Switch
+            android:id="@+id/switch4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text=""
+            android:switchMinWidth="56dp"
+            android:textOff="Closed"
+            android:textOn="Open"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/uia_linear4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/ev1o"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EV1 Oxygen"
+            android:textSize="24sp"
+            android:layout_weight="0.5"
+            />
+
+        <Switch
+            android:id="@+id/switch5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text=""
+            android:switchMinWidth="56dp"
+            android:textOff="Closed"
+            android:textOn="Open"/>
+
+        <TextView
+            android:id="@+id/ev2o"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EV2 Oxygen"
+            android:textSize="24sp"
+            android:layout_weight="0.5"/>
+
+        <Switch
+            android:id="@+id/switch6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text=""
+            android:switchMinWidth="56dp"
+            android:textOff="Closed"
+            android:textOn="Open"/>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16sp"
+        android:layout_marginBottom="16sp"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:id="@+id/uia_linear5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/o2vent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="O2 Vent"
+            android:textSize="24sp" />
+
+        <Switch
+            android:id="@+id/switch7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:paddingLeft="205dp"
+            android:switchMinWidth="56dp"
+            android:switchPadding="10dp"
+            android:text=""
+            android:textOff="Closed"
+            android:textOn="Open" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/uia_linear6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/depressPump"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Depress Pump"
+            android:textSize="24sp"
+            />
+
+        <Switch
+            android:id="@+id/switch8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:paddingLeft="142dp"
+            android:switchMinWidth="56dp"
+            android:switchPadding="10dp"
+            android:text=""
+            android:textOff="Closed"
+            android:textOn="Open" />
+
+    </LinearLayout>
+
+</LinearLayout>

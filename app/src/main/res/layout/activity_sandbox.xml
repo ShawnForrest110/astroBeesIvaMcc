@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Sandbox">
+
+    <ImageView
+        android:id="@+id/moonMap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/moonnavtest"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <TextView
+        android:id="@+id/xView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_weight="0.5"
+        android:text="X Coordinate: "
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/moonMap" />
+
+    <TextView
+        android:id="@+id/xPos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_weight="0.5"
+        android:text=""
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@+id/xView"
+        app:layout_constraintTop_toBottomOf="@+id/moonMap" />
+
+    <TextView
+        android:id="@+id/yView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_weight="0.5"
+        android:text="Y Coordinate: "
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/xView" />
+
+    <TextView
+        android:id="@+id/yPos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_weight="0.5"
+        android:inputType="number"
+        android:text=""
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@+id/yView"
+        app:layout_constraintTop_toBottomOf="@+id/xPos" />
+
+    <Button
+        android:id="@+id/submitBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_weight="0.5"
+        android:text="Submit"
+        android:textSize="30sp"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/yView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
