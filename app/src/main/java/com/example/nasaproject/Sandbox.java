@@ -2,18 +2,15 @@ package com.example.nasaproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Picture;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -28,9 +25,6 @@ import com.android.volley.toolbox.Volley;
 
 import java.util.ArrayList;
 
-import android.graphics.Path;
-import android.widget.Toast;
-
 public class Sandbox extends AppCompatActivity {
 
     private ImageView moonMap;
@@ -42,6 +36,30 @@ public class Sandbox extends AppCompatActivity {
 
     private int n = 0;
     private ArrayList<ArrayList<Integer>> coordsArray = new ArrayList<>(2);
+    private ArrayList<Waypoint> waypoints = new ArrayList<>();
+
+    private String tag = this.getClass().getSimpleName();
+
+    // TODO: 3/26/21 Continue working on this (GV) 
+    private void drawWaypoints() {
+        // Stopping the drawWaypoints if there is nothing to draw or draw on
+        if (moonMap == null || waypoints == null || waypoints.size() == 0 )
+            return;
+
+        // Now that we know there is a map and there are waypoints, we can draw
+
+        for ( Waypoint w : waypoints ) {
+            Log.i(tag, "Waypoint: " + w.toString());
+        }
+
+        // TODO: 3/26/21 Continue from here... GV
+    }
+
+    // TODO: 3/26/21 Implement this (GV) 
+    private void clearWaypoints() {
+        // Remove all waypoints from the server and locally
+        waypoints.clear();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +82,15 @@ public class Sandbox extends AppCompatActivity {
 
                 String xLoc = xCoord.getText().toString();
                 String yLoc = yCoord.getText().toString();
+
+                Waypoint waypoint = new Waypoint();
+                try {
+                    waypoint.xCoord = Double.parseDouble(xCoord.getText().toString());
+                    waypoint.yCoord = Double.parseDouble(yCoord.getText().toString());
+                    waypoints.add(waypoint);
+                } catch (Exception e) {
+                    Log.i(tag, "An exception occurred trying to save the coordinates.");
+                }
 
                 String toSubmit = "http://192.168.0.107:8123/locations/add?loc_id=test102&coords=[" + xLoc + ", " + yLoc + "]&description=Some new location&title=First saved location&images=[path1, path2]&owner=xemu2&static=true";
 
@@ -131,7 +158,7 @@ public class Sandbox extends AppCompatActivity {
                 canvas.drawBitmap(bitmap, 0, 0, null);
 
                 Paint paint = new Paint();
-                paint.setColor(Color.parseColor("#ff0000"));
+                paint.setColor(Color.parseColor("#ff0000")); // Red
 
                 //created a new Paint for the line between points - MA
                 Paint paint2 = new Paint();
