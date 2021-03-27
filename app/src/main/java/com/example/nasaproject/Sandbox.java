@@ -32,7 +32,8 @@ public class Sandbox extends AppCompatActivity {
     private TextView yCoord;
     private TextView xTitle;
     private TextView yTitle;
-    private Button submit;
+    private Button setWaypointButton;
+    private Button clearWaypointsButton;
 
     private int n = 0;
     private ArrayList<ArrayList<Integer>> coordsArray = new ArrayList<>(2);
@@ -58,6 +59,7 @@ public class Sandbox extends AppCompatActivity {
     // TODO: 3/26/21 Implement this (GV) 
     private void clearWaypoints() {
         // Remove all waypoints from the server and locally
+        Log.i(tag, "Clearing waypoints");
         waypoints.clear();
     }
 
@@ -73,9 +75,12 @@ public class Sandbox extends AppCompatActivity {
         this.yCoord = (TextView)this.findViewById(R.id.yPos);
         this.xTitle = (TextView)this.findViewById(R.id.xView);
         this.yTitle = (TextView)this.findViewById(R.id.yView);
-        this.submit = (Button)this.findViewById(R.id.submitBtn);
+
+        this.setWaypointButton = (Button)this.findViewById(R.id.setWaypointBtn);
+        this.clearWaypointsButton = (Button)this.findViewById(R.id.clearWaypointsBtn);
+
         //CustomView customView = new CustomView(this); //is this CustomView needed? -CG
-        submit.setOnClickListener(new View.OnClickListener() {
+        setWaypointButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.i("submitBtn", "I just clicked the button...");
@@ -88,6 +93,7 @@ public class Sandbox extends AppCompatActivity {
                     waypoint.xCoord = Double.parseDouble(xCoord.getText().toString());
                     waypoint.yCoord = Double.parseDouble(yCoord.getText().toString());
                     waypoints.add(waypoint);
+                    Log.i(tag, "New waypoint: " + waypoint);
                 } catch (Exception e) {
                     Log.i(tag, "An exception occurred trying to save the coordinates.");
                 }
@@ -115,6 +121,13 @@ public class Sandbox extends AppCompatActivity {
             }
         });
 
+        clearWaypointsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearWaypoints();
+            }
+        });
+
         //create request queue outside listener - CG
         final RequestQueue requestQueue = Volley.newRequestQueue(this); //for submit button
 
@@ -137,7 +150,6 @@ public class Sandbox extends AppCompatActivity {
                 double normalizedX = ((double)(x)/imageWidth) * 10d;
                 double normalizedY = ((double)(y)/imageHeight) * 10d;
 
-
                 Log.i("Image", "Clicked on coords x and y " + x + ", " + y + " - " + moonMap.getWidth() + "x" + moonMap.getHeight());
 
                 Log.i("Testing","List " + n + ":" + coordsArray.get(n).get(0) + ' ' + coordsArray.get(n).get(1));
@@ -147,7 +159,6 @@ public class Sandbox extends AppCompatActivity {
                 //yCoord.setText(String.valueOf(y) + " | Norm: " + normalizedY);
                 xCoord.setText(Double.toString(normalizedX));
                 yCoord.setText(Double.toString(normalizedY));
-
 
                 // GV Testing - Start
                 Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.moonnavtest);
