@@ -139,7 +139,7 @@ public class Sandbox extends AppCompatActivity {
                 int y = (int)motionEvent.getY();
 
                 // initialize an ArrayList of ArrayLists - MA
-                coordsArray.add(new ArrayList());
+                coordsArray.add(new ArrayList<Integer>());
                 // add x & y coordinates to Array List - MA
                 coordsArray.get(n).add(x);
                 coordsArray.get(n).add(y);
