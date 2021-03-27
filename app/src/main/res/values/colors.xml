@@ -6,4 +6,7 @@
     <color name="firstWaypoint">#0000ff</color>
     <color name="intermediateWaypoint">#00ff00</color>
     <color name="finalWaypoint">#ff0000</color>
+    <color name="waypointPath">#ff8800</color>
+    <color name="candidateWaypoint">#ff9999</color>
+    <color name="candidatePath">#ff9999</color>
 </resources>

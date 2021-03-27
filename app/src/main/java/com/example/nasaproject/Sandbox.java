@@ -37,11 +37,14 @@ public class Sandbox extends AppCompatActivity {
 
     private int n = 0;
     private ArrayList<ArrayList<Integer>> coordsArray = new ArrayList<>(2);
+
+    private int waypointRadius = 20;
     private ArrayList<Waypoint> waypoints = new ArrayList<>();
 
     private String tag = this.getClass().getSimpleName();
 
-    // TODO: 3/26/21 Continue working on this (GV) 
+    // TODO: 3/26/21 Continue working on this (GV)
+    // TODO: 3/27/21 Maybe overload the method and if the number is specified then draw a double waypoint circle to show the selected one
     private void drawWaypoints() {
         // Stopping the drawWaypoints if there is nothing to draw or draw on
         if (moonMap == null || waypoints == null || waypoints.size() == 0 )
@@ -54,13 +57,71 @@ public class Sandbox extends AppCompatActivity {
         }
 
         // TODO: 3/26/21 Continue from here... GV
+
+        Log.i(tag, "Drawing waypoints...");
+
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.moonnavtest);
+
+        Bitmap newBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(newBitmap);
+
+        canvas.drawBitmap(bitmap, 0, 0, null);
+
+        // Drawing the waypoints
+
+        Paint paint = new Paint();
+
+        Paint pathPaint = new Paint();
+        pathPaint.setColor(getResources().getColor(R.color.waypointPath));
+        pathPaint.setStrokeWidth(3);
+        pathPaint.setStyle(Paint.Style.STROKE);
+
+        // Draw the paths between consecutive waypoints
+        for ( int i = 0; i < waypoints.size()-1; i++ ) {
+            int xOri = (int)(waypoints.get(i).xCoord * (double)moonMap.getWidth());
+            int yOri = (int)(waypoints.get(i).yCoord * (double)moonMap.getHeight());
+
+            int xDest = (int)(waypoints.get(i+1).xCoord * (double)moonMap.getWidth());
+            int yDest = (int)(waypoints.get(i+1).yCoord * (double)moonMap.getHeight());
+
+            canvas.drawLine(xOri,yOri,xDest,yDest,pathPaint);
+        }
+
+        // Iterate through the array list and draw every point that is stored - MA
+        for ( int i = 0; i < waypoints.size(); i++ ) {
+            int x = (int)(waypoints.get(i).xCoord * (double)moonMap.getWidth());
+            int y = (int)(waypoints.get(i).yCoord * (double)moonMap.getHeight());
+
+            if ( i == 0 )
+                paint.setColor(getResources().getColor(R.color.firstWaypoint));
+            else if ( i == waypoints.size()-1 )
+                paint.setColor(getResources().getColor(R.color.finalWaypoint));
+            else
+                paint.setColor(getResources().getColor(R.color.intermediateWaypoint));
+
+            canvas.drawCircle(x,y,waypointRadius,paint);
+        }
+        
+        moonMap.setImageDrawable(new BitmapDrawable(getResources(), newBitmap));
     }
 
-    // TODO: 3/26/21 Implement this (GV) 
+    /**
+     * Clears the waypoints and restores the original image.
+     */
     private void clearWaypoints() {
         // Remove all waypoints from the server and locally
         Log.i(tag, "Clearing waypoints");
         waypoints.clear();
+
+        // Removing the values within the TextViews
+        Log.i(tag, "Clearing the UI");
+        xCoord.setText("");
+        yCoord.setText("");
+
+        // TODO: 3/27/21 Clear the waypoints in ARGOS
+
+        // Resetting the original bitmap
+        moonMap.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.moonnavtest));
     }
 
     @Override
@@ -79,7 +140,7 @@ public class Sandbox extends AppCompatActivity {
         this.setWaypointButton = (Button)this.findViewById(R.id.setWaypointBtn);
         this.clearWaypointsButton = (Button)this.findViewById(R.id.clearWaypointsBtn);
 
-        //CustomView customView = new CustomView(this); //is this CustomView needed? -CG
+        //CustomView customView = new CustomView(this); //is this CustomView needed? -CG I don't think so. -GV
         setWaypointButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,6 +156,9 @@ public class Sandbox extends AppCompatActivity {
                     waypoint.description = "Waypoint " + waypoints.size();
                     waypoints.add(waypoint);
                     Log.i(tag, "New waypoint: " + waypoint);
+                    xCoord.setText("");
+                    yCoord.setText("");
+                    drawWaypoints();
                 } catch (Exception e) {
                     Log.i(tag, "An exception occurred trying to save the coordinates.");
                 }
@@ -132,7 +196,7 @@ public class Sandbox extends AppCompatActivity {
         //create request queue outside listener - CG
         final RequestQueue requestQueue = Volley.newRequestQueue(this); //for submit button
 
-        // onHoverListener?
+        // onHoverListener? Maybe later...
         this.moonMap.setOnHoverListener(new View.OnHoverListener() {
             @Override
             public boolean onHover(View v, MotionEvent motionEvent) {
@@ -160,8 +224,12 @@ public class Sandbox extends AppCompatActivity {
                 double imageWidth = moonMap.getWidth();
                 double imageHeight = moonMap.getHeight();
 
-                double normalizedX = ((double)(x)/imageWidth) * 10d;
-                double normalizedY = ((double)(y)/imageHeight) * 10d;
+                double normalizedX = ((double)(x)/imageWidth);
+                double normalizedY = ((double)(y)/imageHeight);
+
+                // Rounding to two decimal places
+                normalizedX = (double)(Math.round(normalizedX*100d)/100d);
+                normalizedY = (double)(Math.round(normalizedY*100d)/100d);
 
                 Log.i("Image", "Clicked on coords x and y " + x + ", " + y + " - " + moonMap.getWidth() + "x" + moonMap.getHeight());
 
@@ -270,7 +338,5 @@ public class Sandbox extends AppCompatActivity {
             }*/
 
         });
-
-
     }
 }
