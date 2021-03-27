@@ -132,6 +132,18 @@ public class Sandbox extends AppCompatActivity {
         //create request queue outside listener - CG
         final RequestQueue requestQueue = Volley.newRequestQueue(this); //for submit button
 
+        // onHoverListener?
+        this.moonMap.setOnHoverListener(new View.OnHoverListener() {
+            @Override
+            public boolean onHover(View v, MotionEvent motionEvent) {
+                int x = (int)motionEvent.getX();
+                int y = (int)motionEvent.getY();
+
+                Log.i(tag, "Hovering over [" + x + "," + y + "]");
+                return false;
+            }
+        });
+
         //gets x & y coordinates to display in textviews & send to octavia - CG
         this.moonMap.setOnTouchListener(new View.OnTouchListener() {
             @Override
