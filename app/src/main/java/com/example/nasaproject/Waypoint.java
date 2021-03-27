@@ -12,6 +12,6 @@ public class Waypoint {
 
     @Override
     public String toString() {
-        return "{ x: " + xCoord + ", y: " + yCoord + "}";
+        return description + ", [" + xCoord + "," + yCoord + "]";
     }
 }

@@ -92,6 +92,7 @@ public class Sandbox extends AppCompatActivity {
                 try {
                     waypoint.xCoord = Double.parseDouble(xCoord.getText().toString());
                     waypoint.yCoord = Double.parseDouble(yCoord.getText().toString());
+                    waypoint.description = "Waypoint " + waypoints.size();
                     waypoints.add(waypoint);
                     Log.i(tag, "New waypoint: " + waypoint);
                 } catch (Exception e) {
