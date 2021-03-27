@@ -6,12 +6,12 @@ package com.example.nasaproject;
  */
 
 public class Waypoint {
-    public String description;
+    public String id;
     public double xCoord;
     public double yCoord;
 
     @Override
     public String toString() {
-        return description + ", [" + xCoord + "," + yCoord + "]";
+        return id + ", [" + xCoord + "," + yCoord + "]";
     }
 }

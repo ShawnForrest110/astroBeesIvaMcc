@@ -44,8 +44,12 @@ public class Sandbox extends AppCompatActivity {
     private String tag = this.getClass().getSimpleName();
 
     // TODO: 3/26/21 Continue working on this (GV)
-    // TODO: 3/27/21 Maybe overload the method and if the number is specified then draw a double waypoint circle to show the selected one
     private void drawWaypoints() {
+        drawWaypoints(null, null);
+    }
+
+    // TODO: 3/27/21 Maybe overload the method and if the number is specified then draw a double waypoint circle to show the selected one
+    private void drawWaypoints(String activeWaypointID, Waypoint candidateWaypoint) {
         // Stopping the drawWaypoints if there is nothing to draw or draw on
         if (moonMap == null || waypoints == null || waypoints.size() == 0 )
             return;
@@ -67,25 +71,42 @@ public class Sandbox extends AppCompatActivity {
 
         canvas.drawBitmap(bitmap, 0, 0, null);
 
-        // Drawing the waypoints
-
-        Paint paint = new Paint();
+        // Drawing the paths between consecutive waypoints
+        // If we draw the paths first, the waypoints will show above the lines
 
         Paint pathPaint = new Paint();
         pathPaint.setColor(getResources().getColor(R.color.waypointPath));
         pathPaint.setStrokeWidth(3);
         pathPaint.setStyle(Paint.Style.STROKE);
 
+        int xOri, yOri, xDest, yDest = 0;
+
         // Draw the paths between consecutive waypoints
         for ( int i = 0; i < waypoints.size()-1; i++ ) {
-            int xOri = (int)(waypoints.get(i).xCoord * (double)moonMap.getWidth());
-            int yOri = (int)(waypoints.get(i).yCoord * (double)moonMap.getHeight());
+            xOri = (int)(waypoints.get(i).xCoord * (double)moonMap.getWidth());
+            yOri = (int)(waypoints.get(i).yCoord * (double)moonMap.getHeight());
 
-            int xDest = (int)(waypoints.get(i+1).xCoord * (double)moonMap.getWidth());
-            int yDest = (int)(waypoints.get(i+1).yCoord * (double)moonMap.getHeight());
+            xDest = (int)(waypoints.get(i+1).xCoord * (double)moonMap.getWidth());
+            yDest = (int)(waypoints.get(i+1).yCoord * (double)moonMap.getHeight());
 
             canvas.drawLine(xOri,yOri,xDest,yDest,pathPaint);
         }
+
+        // Drawing the path from the last waypoint to the candidate waypoint, if one exists
+        if ( candidateWaypoint != null ) {
+            pathPaint.setColor(getResources().getColor(R.color.candidatePath));
+
+            xOri = (int)(waypoints.get(waypoints.size()-1).xCoord * (double)moonMap.getWidth());
+            yOri = (int)(waypoints.get(waypoints.size()-1).yCoord * (double)moonMap.getWidth());
+            xDest = (int)(candidateWaypoint.xCoord * (double)moonMap.getWidth());
+            yDest = (int)(candidateWaypoint.yCoord * (double)moonMap.getWidth());
+
+            canvas.drawLine(xOri,yOri,xDest,yDest,pathPaint);
+        }
+
+        // Drawing the waypoints
+
+        Paint paint = new Paint();
 
         // Iterate through the array list and draw every point that is stored - MA
         for ( int i = 0; i < waypoints.size(); i++ ) {
@@ -98,6 +119,16 @@ public class Sandbox extends AppCompatActivity {
                 paint.setColor(getResources().getColor(R.color.finalWaypoint));
             else
                 paint.setColor(getResources().getColor(R.color.intermediateWaypoint));
+
+            canvas.drawCircle(x,y,waypointRadius,paint);
+        }
+
+        // Drawing the candidate waypoint, if one exists
+        if ( candidateWaypoint != null ) {
+            paint.setColor(getResources().getColor(R.color.candidateWaypoint));
+
+            int x = (int)(candidateWaypoint.xCoord * (double)moonMap.getWidth());
+            int y = (int)(candidateWaypoint.yCoord * (double)moonMap.getHeight());
 
             canvas.drawCircle(x,y,waypointRadius,paint);
         }
@@ -153,7 +184,7 @@ public class Sandbox extends AppCompatActivity {
                 try {
                     waypoint.xCoord = Double.parseDouble(xCoord.getText().toString());
                     waypoint.yCoord = Double.parseDouble(yCoord.getText().toString());
-                    waypoint.description = "Waypoint " + waypoints.size();
+                    waypoint.id = "Waypoint " + waypoints.size();
                     waypoints.add(waypoint);
                     Log.i(tag, "New waypoint: " + waypoint);
                     xCoord.setText("");
