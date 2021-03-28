@@ -10,9 +10,10 @@
         android:id="@+id/moonMap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/moonnavtest"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/moonnavtest" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -28,7 +29,7 @@
         android:layout_marginTop="40dp"
         android:layout_weight="0.5"
         android:text="X: "
-        android:textSize="30sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/moonMap" />
 
@@ -39,7 +40,8 @@
         android:layout_marginTop="40dp"
         android:layout_weight="0.5"
         android:text=""
-        android:textSize="30sp"
+        android:width="50sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toEndOf="@+id/xView"
         app:layout_constraintTop_toBottomOf="@+id/moonMap" />
 
@@ -47,24 +49,21 @@
         android:id="@+id/yView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_weight="0.5"
         android:text="Y: "
-        android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/xView" />
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@+id/xPos"
+        app:layout_constraintTop_toTopOf="@+id/xView" />
 
     <TextView
         android:id="@+id/yPos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_weight="0.5"
         android:inputType="number"
         android:text=""
-        android:textSize="30sp"
+        android:width="50sp"
         app:layout_constraintStart_toEndOf="@+id/yView"
-        app:layout_constraintTop_toBottomOf="@+id/xPos" />
+        app:layout_constraintTop_toTopOf="@+id/yView" />
 
     <LinearLayout
         android:layout_width="wrap_content"
