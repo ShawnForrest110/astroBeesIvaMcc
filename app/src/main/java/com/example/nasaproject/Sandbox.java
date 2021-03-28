@@ -1,6 +1,8 @@
 package com.example.nasaproject;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -35,13 +37,15 @@ public class Sandbox extends AppCompatActivity {
     private Button setWaypointButton;
     private Button clearWaypointsButton;
 
-    private int n = 0;
-    private ArrayList<ArrayList<Integer>> coordsArray = new ArrayList<>(2);
+    //private int n = 0;
+    //private ArrayList<ArrayList<Integer>> coordsArray = new ArrayList<>(2);
 
     private int waypointRadius = 20;
     private ArrayList<Waypoint> waypoints = new ArrayList<>();
 
     private String tag = this.getClass().getSimpleName();
+
+    RecyclerView waypointListRecyclerView;
 
     // TODO: 3/26/21 Continue working on this (GV)
     private void drawWaypoints() {
@@ -142,6 +146,8 @@ public class Sandbox extends AppCompatActivity {
         }
         
         moonMap.setImageDrawable(new BitmapDrawable(getResources(), newBitmap));
+
+        waypointListRecyclerView.setAdapter(new WaypointListRecyclerAdapter(this, waypoints));
     }
 
     /**
@@ -161,6 +167,8 @@ public class Sandbox extends AppCompatActivity {
 
         // Resetting the original bitmap
         moonMap.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.moonnavtest));
+
+        waypointListRecyclerView.setAdapter(new WaypointListRecyclerAdapter(this, waypoints));
     }
 
     @Override
@@ -255,10 +263,10 @@ public class Sandbox extends AppCompatActivity {
                 int y = (int)motionEvent.getY();
 
                 // initialize an ArrayList of ArrayLists - MA
-                coordsArray.add(new ArrayList<Integer>());
+                //coordsArray.add(new ArrayList<Integer>());
                 // add x & y coordinates to Array List - MA
-                coordsArray.get(n).add(x);
-                coordsArray.get(n).add(y);
+                //coordsArray.get(n).add(x);
+                //coordsArray.get(n).add(y);
 
                 double imageWidth = moonMap.getWidth();
                 double imageHeight = moonMap.getHeight();
@@ -272,7 +280,7 @@ public class Sandbox extends AppCompatActivity {
 
                 Log.i("Image", "Clicked on coords x and y " + x + ", " + y + " - " + moonMap.getWidth() + "x" + moonMap.getHeight());
 
-                Log.i("Testing","List " + n + ":" + coordsArray.get(n).get(0) + ' ' + coordsArray.get(n).get(1));
+                //Log.i("Testing","List " + n + ":" + coordsArray.get(n).get(0) + ' ' + coordsArray.get(n).get(1));
 
                 //display coordinates in textviews - CG
                 //xCoord.setText(String.valueOf(x) + " | Norm: " + normalizedX);
@@ -342,7 +350,7 @@ public class Sandbox extends AppCompatActivity {
                 });*/
 
                 //increase the first coordArray index - MA
-                n = n+1;
+                //n = n+1;
 
                 return false;
             }
@@ -382,5 +390,10 @@ public class Sandbox extends AppCompatActivity {
             }*/
 
         });
+
+        waypointListRecyclerView = findViewById(R.id.waypoints_list);
+        waypointListRecyclerView.setHasFixedSize(true);
+        waypointListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        waypointListRecyclerView.setAdapter(new WaypointListRecyclerAdapter(this, waypoints));
     }
 }
