@@ -48,10 +48,18 @@ public class Sandbox extends AppCompatActivity {
         drawWaypoints(null, null);
     }
 
+    private void drawWaypoints(String activeWaypointID) {
+        drawWaypoints(activeWaypointID, null);
+    }
+
+    private void drawWaypoints(Waypoint candidateWaypoint) {
+        drawWaypoints(null, candidateWaypoint);
+    }
+
     // TODO: 3/27/21 Maybe overload the method and if the number is specified then draw a double waypoint circle to show the selected one
     private void drawWaypoints(String activeWaypointID, Waypoint candidateWaypoint) {
         // Stopping the drawWaypoints if there is nothing to draw or draw on
-        if (moonMap == null || waypoints == null || waypoints.size() == 0 )
+        if ( moonMap == null || waypoints == null )
             return;
 
         // Now that we know there is a map and there are waypoints, we can draw
@@ -93,13 +101,13 @@ public class Sandbox extends AppCompatActivity {
         }
 
         // Drawing the path from the last waypoint to the candidate waypoint, if one exists
-        if ( candidateWaypoint != null ) {
+        if ( candidateWaypoint != null && waypoints.size() > 0 ) {
             pathPaint.setColor(getResources().getColor(R.color.candidatePath));
 
             xOri = (int)(waypoints.get(waypoints.size()-1).xCoord * (double)moonMap.getWidth());
-            yOri = (int)(waypoints.get(waypoints.size()-1).yCoord * (double)moonMap.getWidth());
+            yOri = (int)(waypoints.get(waypoints.size()-1).yCoord * (double)moonMap.getHeight());
             xDest = (int)(candidateWaypoint.xCoord * (double)moonMap.getWidth());
-            yDest = (int)(candidateWaypoint.yCoord * (double)moonMap.getWidth());
+            yDest = (int)(candidateWaypoint.yCoord * (double)moonMap.getHeight());
 
             canvas.drawLine(xOri,yOri,xDest,yDest,pathPaint);
         }
@@ -272,7 +280,12 @@ public class Sandbox extends AppCompatActivity {
                 xCoord.setText(Double.toString(normalizedX));
                 yCoord.setText(Double.toString(normalizedY));
 
-                // GV Testing - Start
+                Waypoint candidateWaypoint = new Waypoint();
+                candidateWaypoint.xCoord = normalizedX;
+                candidateWaypoint.yCoord = normalizedY;
+                drawWaypoints(candidateWaypoint);
+
+                /*/ GV Testing - Start
                 Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.moonnavtest);
 
                 Bitmap newBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
